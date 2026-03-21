@@ -8,7 +8,7 @@ terraform {
 
   backend "s3" {
     bucket = "remote-state-chandra"
-    key    = "roboshop-dev-sg"
+    key    = "roboshop-dev-bastion"
     region = "us-east-1"
   }
 }
