@@ -11,6 +11,8 @@ variable "sg_name" {
         "mongodb", "redis", "mysql", "rabbitmq",
         "catalogue", "user", "cart", "shipping", "payment",
         "frontend",
-        "bastion"
+        "bastion",
+        "frontend_alb",
+        "backend_alb"
     ]
 }
