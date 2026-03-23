@@ -1,4 +1,4 @@
-resource "aws_security_group_rule" "backend-alb-bastion" {
+resource "aws_security_group_rule" "backend_alb_bastion" {
   type              = "ingress"
   from_port         = 80
   to_port           = 80
@@ -7,7 +7,7 @@ resource "aws_security_group_rule" "backend-alb-bastion" {
   source_security_group_id = local.bastion_sg_id
 }
 
-resource "aws_security_group_rule" "bastion-laptop" {
+resource "aws_security_group_rule" "bastion_laptop" {
   type              = "ingress"
   from_port         = 22
   to_port           = 22
