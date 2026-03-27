@@ -5,6 +5,7 @@ resource "aws_instance" "bastion" {
     subnet_id = local.subnet_id
     iam_instance_profile = aws_iam_instance_profile.bastion.name
     user_data = file("bastion.sh")
+    user_data_replace_on_change = true
 
     tags = merge(
     local.common_tags,
