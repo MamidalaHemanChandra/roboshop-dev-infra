@@ -1,7 +1,6 @@
-resource "aws_ssm_parameter" "sg_ids" {
-  count = length(var.sg_name)
-  name  = "/${var.project}/${var.environment}/${var.sg_name[count.index]}_sg_id"
+resource "aws_ssm_parameter" "backend-alb" {
+  name  = "/${var.project}/${var.environment}/backend-alb"
   type  = "String"
-  value = module.sg[count.index].sg_id
+  value = aws_lb_listener.backend-alb.arn
   overwrite = true
 }
