@@ -131,10 +131,6 @@ resource "aws_autoscaling_group" "catalogue" {
     preferences {
       min_healthy_percentage = 50
     }
-    rolling_update {
-    triggers = ["launch_template"]
-    }
-  
   }
 
 
