@@ -3,7 +3,6 @@ terraform {
     aws = {
       source = "hashicorp/aws"
       version = "6.37.0"
-      region = "us-east-1"
     }
   }
 
@@ -11,11 +10,12 @@ terraform {
     bucket = "remote-state-chandra"
     key    = "roboshop-dev-cat"
     region = "us-east-1"
-    use_lockfile = true
+    use_lockfile = false
     encrypt = true
   }
 }
 
 provider "aws" {
   # Configuration options
+  region = "us-east-1"
 }
