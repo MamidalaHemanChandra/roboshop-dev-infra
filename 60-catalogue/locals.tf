@@ -2,9 +2,6 @@ locals {
     ami_id = data.aws_ami.heman.id
     catalogue_sg_id = data.aws_ssm_parameter.catalogue_sg_id.value
     private_subnet_id = split(",", data.aws_ssm_parameter.private_subnet_ids.value)[0]
-    private_subnet_ids = split(",", data.aws_ssm_parameter.private_subnet_ids.value)
-    backend-alb = data.aws_ssm_parameter.backend-alb.value
-    vpc_id = data.aws_ssm_parameter.vpc_id.value
     common_tags = {
         Project = var.project
         Environment = var.environment
