@@ -10,6 +10,7 @@ terraform {
     bucket = "remote-state-chandra"
     key    = "roboshop-dev-vpc"
     region = "us-east-1"
+    use_lockfile = false
   }
 }
 

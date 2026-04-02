@@ -10,7 +10,7 @@ terraform {
     bucket = "remote-state-chandra"
     key    = "roboshop-dev-sg-rules"
     region = "us-east-1"
-    use_lockfile = true
+    use_lockfile = false
     encrypt = true
   }
 }
