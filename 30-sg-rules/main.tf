@@ -98,6 +98,14 @@ resource "aws_security_group_rule" "payment_bastion" {
   source_security_group_id = local.bastion_sg_id
 }
 
+resource "aws_security_group_rule" "frontend_bastion" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = local.frontend_sg_id
+  source_security_group_id = local.bastion_sg_id
+}
 
 #connections db to components
 resource "aws_security_group_rule" "mongodb_catalogue" {
@@ -163,41 +171,31 @@ resource "aws_security_group_rule" "rabbitmq_payment" {
   source_security_group_id = local.payment_sg_id
 }
 
-
-#connections b/w component to component
-resource "aws_security_group_rule" "catalogue_cart" {
+# connections b/w component to component through backend_alb
+resource "aws_security_group_rule" "backend_alb_cart" {
   type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
+  from_port         = 80
+  to_port           = 80
   protocol          = "tcp"
-  security_group_id = local.catalogue_sg_id
+  security_group_id = local.backend_alb_sg_id
   source_security_group_id = local.cart_sg_id
 }
 
-resource "aws_security_group_rule" "cart_shipping" {
+resource "aws_security_group_rule" "backend_alb_shipping" {
   type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
+  from_port         = 80
+  to_port           = 80
   protocol          = "tcp"
-  security_group_id = local.cart_sg_id
+  security_group_id = local.backend_alb_sg_id
   source_security_group_id = local.shipping_sg_id
 }
 
-resource "aws_security_group_rule" "cart_payment" {
+resource "aws_security_group_rule" "backend_alb_payment" {
   type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
+  from_port         = 80
+  to_port           = 80
   protocol          = "tcp"
-  security_group_id = local.cart_sg_id
-  source_security_group_id = local.payment_sg_id
-}
-
-resource "aws_security_group_rule" "user_payment" {
-  type              = "ingress"
-  from_port         = 8080
-  to_port           = 8080
-  protocol          = "tcp"
-  security_group_id = local.user_sg_id
+  security_group_id = local.backend_alb_sg_id
   source_security_group_id = local.payment_sg_id
 }
 
@@ -275,3 +273,41 @@ resource "aws_security_group_rule" "backend_alb_frontend" {
   security_group_id = local.frontend_alb_sg_id
   source_security_group_id = local.frontend_sg_id
 }
+
+/*
+connections b/w component to component
+resource "aws_security_group_rule" "catalogue_cart" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  security_group_id = local.catalogue_sg_id
+  source_security_group_id = local.cart_sg_id
+}
+
+resource "aws_security_group_rule" "cart_shipping" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  security_group_id = local.cart_sg_id
+  source_security_group_id = local.shipping_sg_id
+}
+
+resource "aws_security_group_rule" "cart_payment" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  security_group_id = local.cart_sg_id
+  source_security_group_id = local.payment_sg_id
+}
+
+resource "aws_security_group_rule" "user_payment" {
+  type              = "ingress"
+  from_port         = 8080
+  to_port           = 8080
+  protocol          = "tcp"
+  security_group_id = local.user_sg_id
+  source_security_group_id = local.payment_sg_id
+} */
