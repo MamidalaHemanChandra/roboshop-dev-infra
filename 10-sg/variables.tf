@@ -13,6 +13,7 @@ variable "sg_name" {
         "frontend",
         "bastion",
         "frontend_alb",
-        "backend_alb"
+        "backend_alb",
+        "open_vpn"
     ]
 }

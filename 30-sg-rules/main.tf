@@ -272,6 +272,53 @@ resource "aws_security_group_rule" "backend_alb_frontend" {
   source_security_group_id = local.frontend_sg_id
 }
 
+#open vpn
+resource "aws_security_group_rule" "open_vpn_443" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "tcp"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "open_vpn_laptop" {
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "open_vpn_943" {
+  type              = "ingress"
+  from_port         = 943
+  to_port           = 943
+  protocol          = "tcp"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "open_vpn_1194" {
+  type              = "ingress"
+  from_port         = 1194
+  to_port           = 1194
+  protocol          = "tcp"
+  security_group_id = local.open_vpn_sg_id
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
+resource "aws_security_group_rule" "components_open_vpn" {
+  for_each = var.vpn_ingress_rules
+  type              = "ingress"
+  from_port         = each.value.port
+  to_port           = each.value.port
+  protocol          = "tcp"
+  security_group_id = each.value.sg_id
+  source_security_group_id = local.open_vpn_sg_id
+}
+
 /*
 connections b/w component to component
 resource "aws_security_group_rule" "catalogue_cart" {
