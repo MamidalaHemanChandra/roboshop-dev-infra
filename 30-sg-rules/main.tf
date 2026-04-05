@@ -310,7 +310,7 @@ resource "aws_security_group_rule" "open_vpn_1194" {
 }
 
 resource "aws_security_group_rule" "components_open_vpn" {
-  for_each = var.vpn_ingress_rules
+  for_each = local.vpn_ingress_rules
   type              = "ingress"
   from_port         = each.value.port
   to_port           = each.value.port

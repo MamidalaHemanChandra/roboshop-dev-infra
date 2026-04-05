@@ -1,6 +1,6 @@
 locals {
     open_vpn = data.aws_ami.open_vpn.id
-    open_vpn_sg_id = data.aws_ssm_parameter.open_vpn.value
+    open_vpn_sg_id = data.aws_ssm_parameter.open_vpn_sg_id.value
     subnet_id = split(",", data.aws_ssm_parameter.public_subnet_ids.value)[0]
     common_tags = {
         Project = var.project

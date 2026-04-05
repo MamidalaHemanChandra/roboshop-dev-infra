@@ -14,7 +14,7 @@ locals {
     frontend_alb_sg_id = data.aws_ssm_parameter.frontend_alb_sg_id.value
     open_vpn_sg_id = data.aws_ssm_parameter.open_vpn_sg_id.value
 
-    vpn_ingress_rules {
+    vpn_ingress_rules = {
         mongodb = {
             sg_id = local.mongodb_sg_id
             port = 22
@@ -51,23 +51,23 @@ locals {
             sg_id = local.payment_sg_id
             port = 22
         }
-        catalogue = {
+        catalogue_8080 = {
             sg_id = local.catalogue_sg_id
             port = 8080
         }
-        user = {
+        user_8080 = {
             sg_id = local.user_sg_id
             port = 8080
         }
-        cart = {
+        cart_8080 = {
             sg_id = local.cart_sg_id
             port = 8080
         }
-        shipping = {
+        shipping_8080 = {
             sg_id = local.shipping_sg_id
             port = 8080
         }
-        payment = {
+        payment_8080 = {
             sg_id = local.payment_sg_id
             port = 8080
         }
