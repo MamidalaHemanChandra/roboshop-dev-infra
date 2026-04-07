@@ -14,7 +14,7 @@ resource "aws_cloudfront_distribution" "roboshop" {
 
   enabled             = true
 
-  aliases = ["${var.project}-${var.environment}.${var.domain_name}"]
+  aliases = ["${var.environment}.${var.domain_name}"]
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
@@ -48,7 +48,7 @@ resource "aws_cloudfront_distribution" "roboshop" {
     cache_policy_id = local.caching_optimized
   }
 
-  price_class = "PriceClass_200"
+  price_class = "PriceClass_All"
 
   restrictions {
     geo_restriction {
